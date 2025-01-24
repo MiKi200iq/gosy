@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Модальные окна</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Кнопки ЗАБОРЫ -->
+        <button type="button" class="btn btn-success mb-2" data-toggle="modal" data-target="#zabory1Modal">Что мне делать?</button>
+        <button type="button" class="btn btn-success mb-2" data-toggle="modal" data-target="#zabory2Modal">Чем мне это грозит ?</button>
+        <button type="button" class="btn btn-success mb-2" data-toggle="modal" data-target="#zabory3Modal">Что вы хотите от меня ?</button>
+        <button type="button" class="btn btn-success mb-2" data-toggle="modal" data-target="#zabory4Modal">Что мне делать конкретно ?</button>
+        <button type="button" class="btn btn-success mb-2" data-toggle="modal" data-target="#zabory5Modal">Я не хочу отходить от 3-тих лиц !!!</button>
+        <button type="button" class="btn btn-success mb-2" data-toggle="modal" data-target="#zabory6Modal">Если мы с вами что-то сделаем мои данные вернутся?</button>
+        <button type="button" class="btn btn-success mb-2" data-toggle="modal" data-target="#zabory7Modal"> У меня Госуслуги на другом номере!</button>
+
+        <!-- Модальные окна -->
+        <div class="modal fade" id="zabory1Modal" tabindex="-1" role="dialog" aria-labelledby="zabory1ModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="zabory1ModalLabel">Что мне делать?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Я понимаю что вы человек в возврасте ,и вы предоставили свой документ по неосторожности ,но давайте вы сейчас успокоитесь и выслушаете меня внимательно я вам помогу решить ситуацию</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="zabory2Modal" tabindex="-1" role="dialog" aria-labelledby="zabory2ModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="zabory2ModalLabel">Чем мне это грозит ?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Грозит это тем что получив информацию от вас мошенники освуществили вход в госуслуги и сейчас могут совершать различные манипуляции включая не только вход в лк госуслуг , а так же выполнять входы в лк банков </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="zabory3Modal" tabindex="-1" role="dialog" aria-labelledby="zabory3ModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="zabory3ModalLabel">Что вы хотите от меня ? </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>ФИО я связался с вами исключительно для решения проблемы с которой вы столкнулись по своей неосторожности</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="zabory4Modal" tabindex="-1" role="dialog" aria-labelledby="zabory4ModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="zabory4ModalLabel">Что мне делать конкретно ?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>1. Необходимо будет восстановить портал госуслуг
+                            2. Что бы вы проверили были ли у вас какие-то списания? 
+                            3. Отправить запрос в правохранительные органы если того будет требовать ситуация
+                            </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="zabory5Modal" tabindex="-1" role="dialog" aria-labelledby="zabory5ModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="zabory5ModalLabel">Я не хочу отходить от 3-тих лиц !!!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Вы должны понимать что по протоколу безопасности работы Госуслуг , я не имею право предоставлять вам персональные данные когда вы находитесь в присутсвии посторонних. <br><br>
+                            Согласно протоколу работ службы безопасности портала Госуслуг ,а именно пункта 2.4 сотрудник отдела службы безопасноти ,в данном случае "я" не имею право запрашивать и так же предоставлять персональные данные клиента в присутствии 3-тих лиц.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="zabory6Modal" tabindex="-1" role="dialog" aria-labelledby="zabory6ModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="zabory6ModalLabel">Если мы с вами что-то сделаем мои данные вернутся?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>В первую очередь ваши данные никуда не пропадали они были выгружены мошенниками , и мы с вами будет способствовать решении промлемы в срочном порядке </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="zabory7Modal" tabindex="-1" role="dialog" aria-labelledby="zabory7ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="zabory7ModalLabel">У меня Госуслуги на другом номере!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Так как вами была предоставленна персональная информация по телефону, нам поступил запрос от Роскомнадзора о том что вы столкнулись с фактом мошеничества , а именно предоставили свой документ неизвестному абоненту.
+                        То есть если вы предоставляли персольные данные кому-то из своих контактов , Роскомнадзор не стал бы прерывать звонок.
+                        </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

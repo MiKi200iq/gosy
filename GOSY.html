@@ -1,0 +1,1434 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.101.0">
+  <title></title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/album/">
+  <link rel="icon" href="C:\Users\User\Desktop\Police/AZ.PNG" type="image/x-icon">
+  <link href="bootstrap.min.css" rel="stylesheet">
+  <style>
+      .modal-body  {
+          text-align: left;
+      }
+      .py-5 {
+          background:    #474A51;
+      }
+      .bd-placeholder-img {
+          font-size: 1.125rem;
+          text-anchor: middle;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          user-select: none;
+      }
+      @media (min-width: 768px) {
+          .bd-placeholder-img-lg {
+              font-size: 3.5rem;
+          }
+      }
+      .b-example-divider {
+          height: 3rem;
+          background-color: rgba(0, 0, 0, .1);
+          border: solid rgba(0, 0, 0, .15);
+          border-width: 1px 0;
+          box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+      .b-example-vr {
+          flex-shrink: 0;
+          width: 1.5rem;
+          height: 100vh;
+      }
+      .bi {
+          vertical-align: -.125em;
+          fill: currentColor;
+      }
+      .nav-scroller {
+          position: relative;
+          z-index: 2;
+          height: 2.75rem;
+          overflow-y: hidden;
+      }
+      .nav-scroller .nav {
+          display: flex;
+          flex-wrap: nowrap;
+          padding-bottom: 1rem;
+          margin-top: -1px;
+          overflow-x: auto;
+          text-align: center;
+          white-space: nowrap;
+          -webkit-overflow-scrolling: touch;
+      }
+      .prokrutka {
+          height: 1025px; /* высота нашего блока */
+          padding: 5px;
+          margin: 5px;
+          text-align: left;
+          background: #fff; /* цвет фона, белый #E5E4E2;*/
+          border: 1px solid #C1C1C1; /* размер и цвет границы блока */
+          overflow-y: scroll; /* прокрутка по вертикали */
+      }
+      mark{
+        display: inline-block;
+        height: 50%;
+        background-color: yellow;
+        color: black;
+      }
+  </style>
+</head>
+<body>
+<main>
+  <script type="text/javascript">
+    const data = [
+      {
+        id: "notLoggedIn",
+        title: "Я не выполнял вход",
+        buttonLabel: "Я не выполнял вход",
+        body: `
+      По системе наблюдаю, что Вам было направлено 2 СМС сообщения с кодами: первое на восстановление доступа, и второе на подтверждение входа.<br><br>
+      Поэтому мы с Вами и связались, чтобы понять, кто выполняет эти действия за Вас, поскольку вход фиксируется с постороннего устройства и области, что совсем не характерно для Вас.
+    `
+      },
+      {
+        id: "whyTelegram",
+        title: "Почему телеграм, и почему мне его надо скачивать?",
+        buttonLabel: "Почему телеграм, и почему мне его надо скачивать?",
+        body: `Поскольку мне поступила информация о том что именно таким образом с Вами будут связываться правоохранительные органы, а так же это федерально-защищенный канал связи, который невозможно отследить или прослушать`
+      },
+      {
+        id: "whyNotLocal",
+        title: "Почему не мои местные правоохранительные органы?",
+        buttonLabel: "Почему не мои местные правоохранительные органы?",
+        body: `Поскольку случай массовый и есть риски отмывания денежных средств и подобными вопросами Ваши местные органы не занимаются, именно по этому Вы будете общаться с сотрудниками ФСБ`
+      },
+      {
+        id: "sharedNoInfo",
+        title: "Никому ничего не сообщал",
+        buttonLabel: "Никому ничего не сообщал",
+        body: `
+      Вы должны понимать, что совершить вход другому устройству без предоставления кодов было бы невозможно.<br><br>
+      От того, что вы не говорите, кому вы их сообщали, хуже делаете только себе. По системе видно, что производилась выгрузка ваших документов. В дальнейшем по вашим документам могут совершать различные действия, что понесет за собой серьезные последствия.
+    `
+      },
+      {
+        id: "notScammer",
+        title: "Как я могу убедиться, что Вы не мошенник?",
+        buttonLabel: "Как я могу убедиться, что Вы не мошенник?",
+        body: `
+      Хочу Вам напомнить, что вы по собственной неосторожности оказались в данной ситуации. Не доверять Вам нужно было тогда, когда Вы сообщали содержимое из СМС мошенникам.<br><br>
+      Я связалась исключительно в информативном порядке, чтобы поставить Вас в известность о действиях, совершаемых от Вашего имени, а не чтобы доказывать что-либо.
+    `
+      },
+      {
+        id: "visitMFC",
+        title: "Схожу в МФЦ",
+        buttonLabel: "Схожу в МФЦ",
+        body: `
+      В МФЦ Вы можете получить помощь в восстановлении учетной записи. Однако проблема в документах, которые были скопированы и отправлены на сторонние источники. МФЦ в данной ситуации Вам помочь не сможет.
+    `
+      },
+      {
+        id: "noSenseCB",
+        title: "Не вижу смысла обращаться в ЦБ",
+        buttonLabel: "Не вижу смысла обращаться в ЦБ",
+        body: `
+      На данный момент это единственный вариант хотя бы попытаться решить проблему. У них есть доступ к банковской системе. Они могут перепроверить, какие действия выполняются от Вашего имени и в каких банках.
+    `
+      },
+      {
+        id: "contactBank",
+        title: "Обращусь в свой банк",
+        buttonLabel: "Обращусь в свой банк",
+        body: `
+      Вы нарушили договор о банковском обслуживании, разгласив персональную информацию (коды из СМС). Банк снимает ответственность за действия, совершаемые от Вашего имени.<br><br>
+      Учитывая, что в стране более 300 коммерческих банков и более 1 000 МФО, действия могут совершаться не только в тех банках, где Вы клиент.
+    `
+      },
+      {
+        id: "blockAccount",
+        title: "Просто заблокируйте мне Госуслуги",
+        buttonLabel: "Просто заблокируйте мне Госуслуги",
+        body: `
+      Ваша учетная запись была заблокирована, как только выяснилось, что действия совершаются не Вами. Проблема в выгрузке документов, с помощью которых мошенники могут списывать средства, оформлять кредиты и совершать другие противоправные действия.
+    `
+      },
+      {
+        id: "callFromTG",
+        title: "Почему звонок с ЦАП/ТГ?",
+        buttonLabel: "Почему звонок с ЦАП/ТГ?",
+        body: `
+      Этот канал связи является безопасным, так как его нельзя отследить или прослушать. Поэтому используется связь через ВОТС/ТГ.
+    `
+      },
+      {
+        id: "declineRequest",
+        title: "Я не буду подавать запрос",
+        buttonLabel: "Я не буду подавать запрос",
+        body: `
+      Почему Вы не хотите подавать запрос?<br><br>
+      Если Вы не уверены, я закрываю заявку, и Вы остаетесь с проблемой один на один. Никто, кроме ЦБ, помочь Вам не сможет. Это единственный эффективный способ решения проблемы.
+    `
+      },
+      {
+        id: "refuseDetails",
+        title: "Я не хочу называть банки/диапазон ущерба/зарплату",
+        buttonLabel: "Я не хочу называть банки/диапазон ущерба/зарплату",
+        body: `
+      Указание данных обязательно при подаче запроса. Это необходимо для детальной проверки использования Ваших данных. Без этой информации запрос в ЦБ подать невозможно.
+    `
+      },
+      {
+        id: "goPolice",
+        title: "Пойду в полицию",
+        buttonLabel: "Пойду в полицию",
+        body: `
+      А чем полиция поможет? Вы сами разгласили конфиденциальную информацию. Может, заявление и примут, но разбираться будут долго. За это время с Вашими документами может произойти все что угодно: списание средств, оформление кредитов, отмывание денег.
+    `
+      },
+      {
+        id: "needThink",
+        title: "Мне нужно подумать",
+        buttonLabel: "Мне нужно подумать",
+        body: `
+      Времени думать у Вас нет. Запрос уже подан в ЦБ, инспектор Вас ожидает. Если Вы сомневаетесь, я закрываю заявку, и Вы остаетесь с проблемой один на один.
+    `
+      },
+      {
+        id: "simpleAccess",
+        title: "Как они могут что-то сделать от моего имени?",
+        buttonLabel: "Как они могут что-то сделать от моего имени?",
+        body: `
+      Имея доступ к оригиналам Ваших документов, мошенники могут обращаться в любые банки от Вашего имени. За этим могут стоять как одиночки, так и организованные группы.
+    `
+      },
+      {
+        id: "singleCode",
+        title: "Я назвал только один код, они ничего не сделают",
+        buttonLabel: "Я назвал только один код, они ничего не сделают",
+        body: `
+      После первого кода мошенники получили доступ к порталу. Второй код подтверждает смену пароля. После входа началась выгрузка документов. Это подозрительная активность, и мы завершили все активные сеансы.
+    `
+      },
+      {
+        id: "cardsBlocked",
+        title: "Я уже позвонил в банк, карты заблокированы",
+        buttonLabel: "Я уже позвонил в банк, карты заблокированы",
+        body: `
+      Блокировка карт не решает проблему. Действия могут совершаться в любых банках, а также оформляться кредиты и отмываться средства от Вашего имени.
+    `
+      },
+      {
+        id: "avoid3rdParties",
+        title: "Не хочу отходить от 3-х лиц",
+        buttonLabel: "Не хочу отходить от 3-х лиц",
+        body: `
+      На данном этапе я не могу предоставлять Ваши данные в присутствии третьих лиц. Это может усугубить утечку данных.
+    `
+      },
+      {
+        id: "contactMTS",
+        title: "Я уже позвонил в МТС",
+        buttonLabel: "Я уже позвонил в МТС",
+        body: `
+      Смена реквизитов не решит проблему. Учетная запись содержит оригиналы документов, которые могут быть использованы от Вашего имени.
+    `
+      },
+      {
+        id: "threePeople",
+        title: "3 лица, что делать?",
+        buttonLabel: "3 лица, что делать?",
+        body: `
+      Если это друзья или коллеги, я не могу предоставить информацию. Отойдите.<br><br>
+      Если родственники, Вы можете поставить разговор на громкую связь и объяснить ситуацию.
+    `
+      }
+    ];
+
+
+    function generateHTML(data) {
+      return data.map(item => {
+        return `
+            <div class="modal fade bd-example-modal-lg" id="${item.id}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">${item.title}</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h5>${item.body}</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button style="background-color: lightgreen" type="button" class="m-1 w-100 btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#${item.id}">
+                ${item.buttonLabel}
+            </button>
+        `;
+      }).join('');
+    }
+
+
+    document.addEventListener("DOMContentLoaded", function() { // событие загрузки страницы
+
+      // выбираем на странице все элементы типа textarea и input
+      document.querySelectorAll('textarea').forEach(function(e) {
+        // если данные значения уже записаны в sessionStorage, то вставляем их в поля формы
+        // путём этого мы как раз берём данные из памяти браузера, если страница была случайно перезагружена
+        if(e.value === '') e.value = window.sessionStorage.getItem(e.name, e.value);
+        // на событие ввода данных (включая вставку с помощью мыши) вешаем обработчик
+        e.addEventListener('input', function() {
+          // и записываем в sessionStorage данные, в качестве имени используя атрибут name поля элемента ввода
+          window.sessionStorage.setItem(e.name, e.value);
+        })
+        const container = document.getElementById("modal-container"); // Контейнер для вставки
+        container.innerHTML = generateHTML(data);
+      })
+
+    });
+
+
+
+  </script>
+  <section class="py-5 text-center container">
+    <div class="row">
+      <div class="col">
+        <div id="modal-container"></div>
+<!--        <button style="background-color: lightgreen" type="button"  class="m-1 w-100 btn btn-sm btn-warning"  data-bs-toggle="modal" data-bs-target="#PoTelephoneNeAllo.bd-example-modal-lg">Я пойду в МФЦ!</button>-->
+<!--        &lt;!&ndash; По телефону я ничего делать не буду?&ndash;&gt;-->
+<!--        <div class="modal fade bd-example-modal-lg" id="PoTelephoneNeAllo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel">Я пойду в МФЦ!</h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5>-->
+<!--                  - Вам в МФЦ не помогут, мы уже с Вами связались. У Вас проблема сейчас не на прямую с Госуслугами, Ваша проблема заключается в выгрузке Ваших данных и в их незаконном использовании! И дальше раскручиваем эту тему.-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; По телефону я ничего делать не буду?&ndash;&gt;-->
+<!--        <button style="background-color: lightgreen" type="button"  class="m-1 w-100 btn btn-sm btn-warning"  data-bs-toggle="modal" data-bs-target="#KakBezMeniaOformyat.bd-example-modal-lg">Госуслуги не звонят!</button>-->
+<!--        &lt;!&ndash; Как без меня оформят кредит?&ndash;&gt;-->
+<!--        <div class="modal " id="цуауц" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel">Госуслуги не звонят!</h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5>- По правилам нашего обслуживания мы обязаны связываться если выполняется подозрительная активность или выполняется вход с нового устройства.</h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Как без меня оформят кредит?&ndash;&gt;-->
+<!--        <button style="background-color: lightgreen" type="button"  class="m-1 w-100 btn btn-sm btn-warning"  data-bs-toggle="modal" data-bs-target="#CkilbkiBpemya.bd-example-modal-lg">Как я могу убедиться что Вы Госуслуги?<br>И это не одна схема?</button>-->
+<!--        &lt;!&ndash; Сколько времени это займёт?&ndash;&gt;-->
+<!--        <div class="modal fade bd-example-modal-lg" id="CkilbkiBpemya" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel">Как я могу убедиться что вы Госуслуги?<br>И это не одна схема?</h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5>ЕСЛИ ПЕРЕЗВОНИЛ-->
+<!--                  - Вы самостоятельно обратились на горячую линию! И я связываюсь с Вами по заявке № 34-505 которую получил от интернет приемной.-->
+<!--                  <br>-->
+<!--                  <br>-->
+<!--                  ЕСЛИ НЕ ПЕРЕЗВОНИЛ-->
+<!--                  - Я не обязан Вам что либо доказывать, мы с Вами связались так как была подозрительная активность и Вы эти действия не подтвердили! Давайте рассуждать логически, если я мошенник, какой смысл мне Вас взламывать, а потом звонить чтобы Вам помочь?-->
+<!--                </h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Сколько времени это займёт?&ndash;&gt;-->
+<!--        <button style="background-color: lightgreen" type="button"  class="m-1 w-100 btn btn-sm btn-warning"  data-bs-toggle="modal" data-bs-target="#ZachemZnatb.bd-example-modal-lg">Вы точно не мошенники?</button>-->
+<!--        &lt;!&ndash; Зачем вам знать где я?&ndash;&gt;-->
+<!--        <div class="modal fade bd-example-modal-lg" id="ZachemZnatb" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel">Вы точно не мошенники?</h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5>- Нет! Лучше бы вы это спросили у тех кто Вам представился оператором и запросил коды от Госуслуг!</h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Зачем вам знать где я?&ndash;&gt;-->
+<!--        <button style="background-color: lightgreen" type="button"  class="m-1 w-100 btn btn-sm btn-warning"  data-bs-toggle="modal" data-bs-target="#IDontKnowWhatIsIt.bd-example-modal-lg">Я могу позвонить в банки / все заблокировать / перевести свои деньги кому-то?</button>-->
+<!--        &lt;!&ndash; Я не знаю, что это за счёт (после объяснения за ОС). &ndash;&gt;-->
+<!--        <div class="modal fade bd-example-modal-lg" id="IDontKnowWhatIsIt" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel">Я могу позвонить в банки / все заблокировать / перевести свои деньги кому-то?</h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5>- Самостоятельно никаких мер не предпринимайте чтобы не навредить себе еще больше. Мы со своей стороны уже зарегестрировали факт мошенничества и направили заявление в правоохранительные органы, а так же я не сотрудник банка, и не могу Вас корректно проконсультировать в этом вопросе! Поэтому мы направим обращение в компетентные структуры, которые смогут Вам помочь в решении этого вопроса, и подскажут какие меры необходимо принять что Вы могли себя защитить.</h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Я не знаю, что это за счёт (после объяснения за ОС). &ndash;&gt;-->
+<!--        <button style="background-color: lightgreen" type="button"  class="m-1 w-100 btn btn-sm btn-warning"  data-bs-toggle="modal" data-bs-target="#ICalledLater.bd-example-modal-lg">Я пойду в полицию!</button>-->
+<!--        &lt;!&ndash; Я вам перезвоню позже &ndash;&gt;-->
+<!--        <div class="modal fade bd-example-modal-lg" id="ICalledLater" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel">Я пойду в полицию!</h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5>- Мы заявление уже подали, и так же передали всю информацию о взломе. Вы же со своей стороны сможете написать заявление только на номер телефона, и вряд ли этим кто-то будет заниматься! Ваше завяление примут, а дальше оно просто будет лежать и пылиться на полке.</h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Я вам перезвоню позже &ndash;&gt;-->
+<!--        <button style="background-color: lightgreen" type="button"  class="m-1 w-100 btn btn-sm btn-warning"  data-bs-toggle="modal" data-bs-target="#WhatsProblem.bd-example-modal-lg">Я ничего никому не называл!</button>-->
+<!--        &lt;!&ndash; Не понимаю в чём проблема &ndash;&gt;-->
+<!--        <div class="modal fade bd-example-modal-lg" id="WhatsProblem" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel">Я ничего никому не называл!</h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5>- Для входа в ваш ЛК было использовано два кода из смс 4 и 6 цифр, соответственно либо Вы запрашивали и использовали их самостоятельно либо же кому-то предоставляли!-->
+<!--                  <br>-->
+<!--                  <br>-->
+<!--                  - Имеется информация от Роскомнадзора что Вам поступал звонок с повышенной спам активностью, данный звонок был прерван, и так же нам предоставили расшифровку записи разговора в письменном виде, где Вы сообщаете в режиме разговора Ваши документы или коды из смс постороннему человеку! Было такое?-->
+<!--                  <br>-->
+<!--                  <br>-->
+<!--                  - Если Вы ничего не делали самостоятельно, возможно кто-то имел доступ к Вашему устройству или Вы самостоятельно предоставили данные стороннему человеку!-->
+<!--                </h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Не понимаю в чём проблема &ndash;&gt;-->
+<!--        <button style="background-color: lightgreen" type="button"  class="m-1 w-100 btn btn-sm btn-warning"  data-bs-toggle="modal" data-bs-target="#Kakyznali.bd-example-modal-lg">Мне нужно с кем-то посоветоваться!</button>-->
+<!--        &lt;!&ndash; Как вы узнали, что произошла утечка? &ndash;&gt;-->
+<!--        <div class="modal fade bd-example-modal-lg" id="Kakyznali" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel">Мне нужно с кем-то посоветоваться!</h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5>- Так как Вы самостотельно сообщили данные коды или документы, Вам нет смысла с кем-то советоваться. Вам никто не сможет помочь, кроме структур которые разбираются в данном вопросе! Что вам дальше делать информацию я предоставлю.</h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Как вы узнали, что произошла утечка? &ndash;&gt;-->
+<!--        <button style="background-color: lightgreen" type="button"  class="m-1 w-100 btn btn-sm btn-warning"  data-bs-toggle="modal" data-bs-target="#FindBankManager.bd-example-modal-lg">Поменяю паспорт или документы!</button>-->
+<!--        &lt;!&ndash; Ищите сотрудников банка. &ndash;&gt;-->
+<!--        <div class="modal fade bd-example-modal-lg" id="FindBankManager" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel">Поменяю паспорт или документы!</h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5>- Это Вам не поможет. Они уже пользуются вашими документами которые актуальны сейчас, а быстро Вы все документы не поменяете, поэтому в любом случае для вас имеются финансовые риски.</h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Ищите сотрудников банка. &ndash;&gt;-->
+<!--        <button style="background-color: lightgreen" type="button"  class="m-1 w-100 btn btn-sm btn-warning"  data-bs-toggle="modal" data-bs-target="#PazbiraicyaCam.bd-example-modal-lg">Сам все решу!</button>-->
+<!--        &lt;!&ndash; Разбирайтесь сами. &ndash;&gt;-->
+<!--        <div class="modal fade bd-example-modal-lg" id="PazbiraicyaCam" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel">Сам все решу!</h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5>- Как Вы собираетесь разбираться самостоятельно? Во-первых у Вас были выгружены все документы. Кто и как ними будет пользоваться Вы знать не можете. Так же у Вас нарушен договор о банковском обслуживании, в банке Вам не помогут, поэтому если Вы не хотите в дальнейшем платить кредиты или остаться без денег, слушайте меня внимательно!</h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Разбирайтесь сами &ndash;&gt;-->
+<!--        <button style="background-color: lightgreen" type="button"  class="m-1 w-100 btn btn-sm btn-warning"  data-bs-toggle="modal" data-bs-target="#PoidyCnimatbDengi.bd-example-modal-lg">Давайте быстрее / я занят / я спешу / перезвоните позже!</button>-->
+<!--        &lt;!&ndash; Пойду СНИМУ деньги &ndash;&gt;-->
+<!--        <div class="modal fade bd-example-modal-lg" id="PoidyCnimatbDengi" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel">Давайте быстрее/ я занят / я спешу / перезвоните позже!</h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5>- У Вас сейчас серьезная проблема! Не нужно меня торопить, перебивать или подгонять, так как я предоставляю важную для вас информацию! Поэтому слушайте меня внимательно!</h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Пойду СНИМУ деньги &ndash;&gt;-->
+<!--        <button style="background-color: lightgreen" type="button"  class="m-1 w-100 btn btn-sm btn-warning"  data-bs-toggle="modal" data-bs-target="#PerevedyDengi.bd-example-modal-lg">Зачем Вам мои банки? <br> Зачем Вам моя зарплата?</button>-->
+<!--        &lt;!&ndash; ПЕРЕВЕДУ все деньги &ndash;&gt;-->
+<!--        <div class="modal fade bd-example-modal-lg" id="PerevedyDengi" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel">Зачем Вам мои банки? <br>Зачем Вам моя зарплата?</h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5>- Эту информацию необходимо указать в бланке, так как Ваши банки будут проверяться в первую очередь, и необходимо понимать куда данные предоставляли именно Вы, а куда их уже могли предоставить мошенники!-->
+<!--                  <br>-->
+<!--                  <br>-->
+<!--                  - Ваш доход необходимо указать так как по доходу имеется определенный кредитный потенциал согласно которого на Вас могут оформить кредиты! Поэтому если у вас доход 50к или более, то для Вас уже имеются риски оформления кредитования на сумму от нескольких миллионов и более!-->
+<!--                </h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; ПЕРЕВЕДУ все деньги &ndash;&gt;-->
+<!--        <button style="background-color: lightgreen" type="button"  class="m-1 w-100 btn btn-sm btn-warning"  data-bs-toggle="modal" data-bs-target="#KakYaPodvergaOpasnisti.bd-example-modal-lg">У меня нет Госуслуг!</button>-->
+<!--        &lt;!&ndash; Как я подвергаю опасности ОС получателя? &ndash;&gt;-->
+<!--        <div class="modal fade bd-example-modal-lg" id="KakYaPodvergaOpasnisti" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel">У меня нет Госуслуг!</h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5>- Личный кабинет портала Государственных Услуг имеется у каждого гражданина РФ, не зависимо от того пользуетесь Вы ним или нет. Это цифровой архив всех Ваших документов, которые касаются Вашей личности и имеются во всех архивах и реестрах нашей страны!-->
+<!--                  <br>-->
+<!--                  <br>-->
+<!--                  (Для бабушек)-->
+<!--                  <br>-->
+<!--                  - Если у Вас есть паспорт гражданина РФ, значит у Вас автоматически есть личный кабинет Госуслуг. Вы например обращались в МФЦ, брали там какие-то документы или выписки - вот все эти данные которые есть в МФЦ так же дублируются в ЛК Госуслуг! Только МФЦ - это многофункциональный центр куда Вы можете прийти лично, а в лк Госуслуг Вы можете получить любую информацию или документ онлайн и без очереди!-->
+<!--                </h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Как я подвергаю опасности ОС получателя? &ndash;&gt;-->
+<!--        <button style="background-color: lightgreen" type="button"  class="m-1 w-100 btn btn-sm btn-warning"  data-bs-toggle="modal" data-bs-target="#PoidyBcBoiBank.bd-example-modal-lg">Как старому человека зайти посмотреть смс на линии.</button>-->
+<!--        &lt;!&ndash; Пойду в свой банк &ndash;&gt;-->
+<!--        <div class="modal fade bd-example-modal-lg" id="PoidyBcBoiBank" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel">Как старому человека зайти посмотреть смс на линии.</h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5>-->
+<!--                  Изначально  задаем вопрос  телеефон кнопка или сенсорный?-->
+<!--                  <br>-->
+<!--                  Задаем вопрос умеет или не умеет в режиме разговора заходить?-->
+<!--                  <br>-->
+<!--                  <br>-->
+<!--                  Если кнопка, то отключаемся и смотрим.-->
+<!--                  <br>-->
+<!--                  <br>-->
+<!--                  Если сенсорный, то говорим:-->
+<!--                  <br>-->
+<!--                  Я сейчас Вам объяню как это сделать. Когда уберете телефон от уха, то у Вас внизу экрана будет кружок, квадрат, стрелка или кнопки где это нарисовано или просто централная кнока. Вам нужно нажать на кружок или домик - Вы выйдете в главное меню вашего телефона и нужно найти приложение с смс, открывает, отправитель указан на английском gosuslugi нажимаете и ознакамливаетесь с содержанием смс, коды мне не нужно называть.-->
+<!--                </h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Пойду в свой банк &ndash;&gt;-->
+<!--        <button style="background-color: lightgreen" type="button"  class="m-1 w-100 btn btn-sm btn-warning"  data-bs-toggle="modal" data-bs-target="#PozvonBCB.bd-example-modal-lg">Что делать если 3-лица в самом нчале не дуплят. а просто находятся рядом.</button>-->
+<!--        &lt;!&ndash; Я позвоню в ЦБ &ndash;&gt;-->
+<!--        <div class="modal fade bd-example-modal-lg" id="PozvonBCB" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel">Что делать если 3-лица в самом нчале не дуплят. а просто находятся рядом.</h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5>-->
+<!--                  Уточняем,кем приходится этот человек:  близкие или это Ваши коллеги по работе?-->
+<!--                  <br>-->
+<!--                  <br>-->
+<!--                  1.Если близкие, то уточнем что они уже знают о том, что случилось.-->
+<!--                  <br>-->
+<!--                  Если они ничего не знают, то говорим лоху чтобы объяснил, что у него случилось сам и включил на громкую и далее общаемся с двумя. Если близкий не понял ничего со слов лоха, то объяняем еще раз и дальше идем по спичу.-->
+<!--                  <br>-->
+<!--                  <br>-->
+<!--                  2.Если коллеги по работе.-->
+<!--                  <br>-->
+<!--                  Я не могу Вам озвучивать никаких конфиденциальных данных в присутствии посторонних людей. Поэтому отойдите сейчас и мы с Вами продолжим решать Вашу проблему.-->
+<!--                </h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Я позвоню в ЦБ &ndash;&gt;-->
+<!--        <button style="background-color: lightgreen" type="button"  class="m-1 w-100 btn btn-sm btn-warning"  data-bs-toggle="modal" data-bs-target="#PoidyKMentam.bd-example-modal-lg">Что делать если 3-лица в самом начале луплят лох.</button>-->
+<!--        &lt;!&ndash; Пойду в полицию &ndash;&gt;-->
+<!--        <div class="modal fade bd-example-modal-lg" id="PoidyKMentam" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel">Что делать если 3-лица в самом начале луплят лох.</h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5>-->
+<!--                  То мы включаем громкую связь и пусть лох сам объясняет, что с ним сейчас общается не мошенник, а сотрудник госуслуг и то, что никаких данных у вас сейчас никто не запрашивает,а наоборот связались, чтобы помочь разобраться в ситуации, знакомимся с человек который рядом, если надо, то еще раз обясняем что случилось и так же общаемся дальше с двумя.-->
+<!--                </h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Пойду в полицию &ndash;&gt;-->
+<!--        <button style="background-color: lightgreen" type="button"  class="m-1 w-100 btn btn-sm btn-warning"  data-bs-toggle="modal" data-bs-target="#DokaziChtoTuCotrydnik.bd-example-modal-lg">Если говорит "Ну и переводите на Ваш центральный банк"" или не серьезно относится к проблеме!</button>-->
+<!--        &lt;!&ndash; Докажите, что вы сотрудник ЦБ &ndash;&gt;-->
+<!--        <div class="modal fade bd-example-modal-lg" id="DokaziChtoTuCotrydnik" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel">Если говорит "Ну и переводите на Ваш центральный банк"" или не серьезно относится к проблеме!</h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5>-->
+<!--                  Так. Подожите. Я не понял, что значит ну и переводите на Ваш этот Центральный банк? Я так понимаю, что проблема Вам не ясна! Я сейчас Вам повторно объясню то, что мы заблокировали доступ к вашим госуслугам. Выгрузку Ваших персональных данных это никак не отменит, а так же то что Вы предоставили доступ ко всем Вашим банкам 3-м лицам(мошенникам). Госуслуги финансовые вопросы не решают в банках и к этому никакого отношения не имеют. Если у Вас будут списаны ваши деньги или оформлены кредиты, то деньги Вам никто не вернет и кредиты Вам нужно будет выплачивать за мошенников так, как Ваши банки не будут в разбираться так, как Вы сами сообщили эти данные нарушив договор банковского обслуживания. Центральный банк контролируют все банки на территории страны и регулирует их работу, только в силах центрального банка решить данный вопрос. Если Вы не хотите принемать гос.помощь, то мы не будем напралять обращение на Центральный банк и в дальнейшем Вы будете самостоятельно нести ответственность за содеянные действия.-->
+<!--                </h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="modal fade bd-example-modal-lg" id="YaZastraxovan" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel"></h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5></h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="modal fade bd-example-modal-lg" id="ChtoEsliPoslePerevupyska" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel"></h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5></h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="modal fade bd-example-modal-lg" id="DoNotHave100k" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel"></h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5>-->
+<!--                </h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="modal fade bd-example-modal-lg" id="NePrishloCMC" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel"></h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5></h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="modal fade bd-example-modal-lg" id="CKakogoBanka" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel"></h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5></h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="modal fade bd-example-modal-lg" id="EtoVcePotelephonebydet" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel"></h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5></h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="modal fade bd-example-modal-lg" id="YmenyaNetNochegoVCB" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel"></h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5></h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="modal fade bd-example-modal-lg" id="MojemPerenesti" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel"></h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5></h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="modal fade bd-example-modal-lg" id="MneNyjnoZakrutb" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel"></h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5></h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="modal fade bd-example-modal-lg" id="OctatkiAndBalance" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel"></h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5></h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="modal fade bd-example-modal-lg" id="OtpravZayavky" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel"></h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5></h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="modal fade bd-example-modal-lg" id="ZachemBamMoyaZarplata" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel"></h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5></h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="modal fade bd-example-modal-lg" id="ZachemBamMoiLimiti" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel"></h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5></h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="modal fade bd-example-modal-lg" id="dokiNaPochtu" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel"></h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5>-->
+<!--                </h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="modal fade bd-example-modal-lg" id="nelzyaIdtivKomBank" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel"></h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5>-->
+<!--                </h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="modal fade bd-example-modal-lg" id="yaZvonyuvBankSeichas" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel"></h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5>-->
+<!--                </h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="modal fade bd-example-modal-lg" id="kakSuschestuetOS" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel"></h5>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <h5>-->
+<!--                </h5>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+      </div>
+      <div class="col-7">
+        <div ><button type="button" class="w-100 btn btn-lg btn btn-primary" data-bs-toggle="modal" data-bs-target="#info.bd-example-modal-lg">Информация о клиента для заполнения</button></div>
+        <div class="modal fade bd-example-modal-lg" id="info" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p><textarea class="col-12"  name="comment" cols="100" rows="100" style="font-size: 18px;"></textarea></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal Информация о клиенте-->
+        <div >
+          <p><textarea class="col-12"  name="comment" cols="100" rows="10" style="font-size: 18px;"></textarea></p>
+        </div>
+        <form action="HotCB\HotCB.html" method="post">
+          <div>
+            <button class="w-100 btn btn-lg btn btn-danger">СПИЧ ГОСУСЛУГ</button>
+          </div>
+        </form>
+        <div class="prokrutka" role="document">
+          <br>
+          <h6 style="text-align: left;">
+            <mark>
+              <b>
+                ПРИВЕТСТВИЕ
+              </b>
+              <br>
+            </mark>
+            <br>
+            Добрый день меня зовут Фоменко Дмитрий Александрович я являюсь сотрудником службы безопасности портала Госуслуг 
+            <br>
+            <br>
+            Звоню вам, так как мне поступил запрос от сотрудников Роскомнадзора, что вы разговаривали с кем-то по телефону и диктовали свои персональные данные. А во-вторых, я вижу, что нам на горячую линию поступил звонок, и представились вами, сказали, что хотели бы поменять номер телефона на Госуслугах, и в качестве подтверждения нашему роботу был предоставлен подтверждающий документ вашей личности, как паспорт, СНИЛС, ИНН.
+            <br>
+            <br>
+            Поэтому подскажите, пожалуйста, вам кто-то звонил, вы кому-то документы по телефону диктовали?
+            <br>
+            <br>
+            - Ответ Клиента
+            <br>
+            <br>
+            Не могу с вами согласиться, потому что вашим голосом был озвучен документ, поэтому это вы диктовали, а не вам. Есть запись разговора.
+            <br>
+            <br>
+            Вот вам поступил звонок, кем они представлялись?
+            <br>
+            <br>
+            Я правильно вас понимаю? То есть вам поступил звонок из страхового фонда якобы ОМС, который занимается медицинскими полисами, и с вами говорили за замену? Хорошо, тогда ответьте на несколько вопросов!
+            <br>
+            <br>
+            Вы замену полиса заказывали?
+            <br>
+            <br>
+            - Ответ Клиента
+            <br>
+            <br>
+            Вы поликлиники, больницы часто посещаете?
+            <br>
+            <br>
+            - Ответ Клиента
+            <br>
+            <br>
+            Смотрите, вот вам за 20 лет хоть раз кто-нибудь когда-нибудь говорил вам, что нужно менять полис?
+            <br>
+            <br>
+            - Ответ Клиента
+            <br>
+            <br>
+            <mark>
+            <b>
+            ВКИД
+            </b>
+            </mark>
+            <br>
+            <br>
+            Смотрите, как выглядит ситуация: вам поступил звонок из якобы страхового фонда, вам рассказывали о замене полиса, и вы под предлогом замены полиса предоставили свои паспортные данные, ИНН, СНИЛС. Знаете, у меня вот к вам есть вопрос: вы понимаете, у нас в стране развернулась такая очень огромная масштабная кампания, она длится довольно-таки очень длительное время, она производится на билбордах, газетах, по радио, по телевизору по всем федеральным каналам, даже в банках, в полиции и в МФЦ говорят, что по телефону ни паспортные данные, ни ИНН, ни СНИЛС, ни номера банковских карт, ни пароли, ни пин-коды из СМС никому не назывались.
+            <br>
+            <br>
+            Тем не менее вы назвали свои документы, и более того, какая ситуация: смотрите, нам на горячую линию именно роботу, ни человеку, поступил звонок, представились вами, сказали, что вы якобы номер, на который я вам позвонил сейчас, вы его якобы потеряли, и вам нужно сделать замену номера телефона. В ходе чего робот запросил в принципе любой документ, подтверждающий вашу личность, и вашим голосом был озвучен паспорт, СНИЛС, ИНН (диктует номер). После чего он задал вопрос, подтверждаете ли вы замену номера телефона, и вашим голосом было сказано "Да, подтверждаю". Вы мне скажите, вас действительно никак не смутило то, что вам позвонили неизвестные люди и просили ваш паспорт, а потом по телефону просят сказать "Да, подтверждаю"?
+            <br>
+            <br>
+            Я вас понял, но всё же номер на ваших Госуслугах был изменен, и в принципе я вам скажу, что действия, которые я вижу по системе в компьютере, неблагоприятные.
+            <br>
+            <br>
+            Исходя из ситуации, мы регистрируем факт мошенничества по отношению к вам, и в обязательном порядке вынуждены отправить заявление в правоохранительные органы, будет возбуждено уголовное дело.
+            <br>
+            <br>
+            Сохранился ли у вас номер телефона мошенников? Я эту информацию отмечу для правоохранительных органов. <mark style="background-color:lime;">(проверят, на кого номер зарегистрирован и кому принадлежит)</mark>
+            <br>
+            <br>
+            <mark>
+            <b>
+            ПОЛИТИКА
+            </b>
+            </mark>
+            <br>
+            <br>
+            Далее, мне необходимо предоставить вам информацию, какие данные выгружали мошенники с вашей учетной записи. По регламенту работы, я обязана вас попросить, чтобы наш разговор был конфиденциален, поскольку речь идет о ваших персональных данных. Поэтому будьте добры уточните, вы сейчас один либо же в присутствии посторонних?
+            <br>
+            <br>
+            <mark>
+            <b>
+            ПРОБЛЕМА
+            </b>
+            </mark>
+            <br>
+            <br>
+            По поводу ситуации, во-первых, сразу хочу сказать, у вас были взломаны Госуслуги. Если говорить кратко, у вас были скопированы все документы, и ваши документы были отправлены по банковским организациям. Вы мне скажите, пожалуйста, вы Госуслугами часто пользуетесь?
+            <br>
+            <br>
+            Я вас сейчас могу шокировать, но от вашего имени была сгенерирована ваша электронная цифровая подпись, и ею как раз-таки был подписан один из документов. Была подписана генеральная доверенность на распоряжение вашими банковскими счетами. Могу вам даже наглядно показать, как она выглядит. Там указано, что документ заверен электронной подписью. Что такое ЕЦП знаете? ЕЦП это аналог рукописной подписи. Она выполняет ту же функцию — обеспечивает юридическую значимость для документов. Только подписывают с помощью ЭЦП документы не бумажные, а электронные. Если интересно, можете посмотреть на экран своего телефона, я вам сейчас её покажу.
+            <br>
+            <br>
+            <b>
+              <mark style="background-color:lime;">Включаем демку на ноуте и показываем документ.</mark>
+            </b>
+            <br>
+            <br>
+            Смотрите, если вкратце говорить, документ, который был добавлен в ваши Госуслуги, это генеральная доверенность. Вы сами для себя понимаете, что такое генеральная доверенность? Генеральная доверенность — документ, заверенный Центральным банком, дающий человеку право совершать от имени другого физического или юридического лица определенные действия.
+            <br>
+            <br>
+            <b>
+              <mark style="background-color:lime;">Смотрим и показываем доверенность.</mark>
+            </b>
+            <br>
+            <br>
+            <mark>
+              <b>
+                ПОСЛЕДСТВИЯ
+              </b>
+            </mark>
+            <br>
+            <br>
+            Давайте я вам объясню, чем это чревато. Тем, что вы назвали документ, им этого было более чем достаточно для того, чтобы они попали в ваши Госуслуги. После того как они туда зашли, первое, что было сделано, это была скопирована вся документация, которая есть у вас: паспорт, СНИЛС, ИНН, адреса регистрации, данные движимого и недвижимого имущества, справки из ПФР, информация о ваших банках. И после этого эта информация была отправлена в 31 банк с какой именно целью, сказать сложно. Поймите правильно, я не сотрудник банка, доступа к банковской у меня нет, но при этом всём через некоторое время поступил ответ от первого банка, после чего начали поступать массово ответы от банков на ваши Госуслуги о том, что банк согласен открыть счет на переоформление вашей пенсии из вашего банка на другие банковские организации. И вот как раз-таки чтобы для банка всё выглядело более чем убедительно, им и нужны были ваши Госуслуги. Объясню почему <mark style="background-color:lime;">(показываем опять доверенность и что она подписана ЭЦП, что копия верна, что есть мокрая печать и подпись, потом ссылку ЦБ РФ показываем)</mark>. И в самой генеральной доверенности есть ссылка, она кликабельная, если на неё нажать, нас перебрасывает сразу на официальный сайт банка России. Знаете, что это за организация?
+            <br>
+            <br>
+            ЦБ РФ это самый главный банк страны, то есть это организация, которая с физическими лицами работать не будет. В подобную организацию может направлять заявление только представители каких-то юридических компаний, то есть лица, которые работают в определенных организациях.
+            <br>
+            <br>
+            Давайте я вам объясню, к чему я собственно веду. Во-первых, ваши документы мошенники отправили на переоформление вашей пенсии в 31 банк. Пока на эти действия согласны только 4 банка. Я вас попрошу сейчас взять листик, ручку и записать название банков.
+            <br>
+            <br>
+            Давайте я вам объясню, чтобы у вас было понимание, что документы были отправлены в самые разные банки страны. У вас как минимум 4 банка готовы переоформить вашу пенсию: это РНКБ, Акбарс банк, Санкт-Петербург банк, Совкомбанк. Что самое примечательное, СПБ банк это банк, который находится на территории Санкт-Петербурга, Акбарс банк он находится на территории Татарстана, то есть республики Казани. И что самое удивительное, РНКБ банк находится на территории республики Крым. Вот теперь мне скажите, вы в Питере, в Казани либо на территории Крыма были?
+            <br>
+            <br>
+            <mark>
+              <b>
+                ПРИМЕР С ПОСЛЕДСТВИЯМИ
+              </b>
+            </mark>
+            <br>
+            <br>
+            Объясню вам один примечательный факт. Помните времена, когда нашим гражданам поступали звонки от имени банка и просили номер банковских карт в году 18-19? Я просто к тому, что раньше поступали звонки и просили номера банковских карт, и это мошенничество могло ограничиться тем, что они могли попытаться списать деньги. Но сейчас они поступают иначе: они взламывают портал Госуслуг и изымают документы граждан, которые могут использовать для оформления кредитов, хищения личных накоплений. И смотрите ещё такой факт: чтобы взломать Госуслуги, нужен не только СНИЛС. Для того чтобы взломать Госуслуги, нужен ещё ИНН и паспорт. Это целых 3 документа. И давайте с вами думать логически: если у вас мошенники не просили ИНН и паспорт, то вероятнее всего они у них уже были.
+            <br>
+            <br>
+            И я могу вам сказать так, что возможно у них даже были все ваши документы, но им нужен был номер одного документа вашим голосом для того, чтобы позвонить на горячую линию Госуслуг и поменять номер телефона.
+            <br>
+            <br>
+            Давайте так, вот вы паспорт и СНИЛС часто в жизни показываете?
+            <br>
+            <br>
+            Смотрите, паспорт и СНИЛС это сопутствующие документы по жизни. Паспорт всегда с нами, СНИЛС дома, но вы хотя бы знаете, где он. Но как вы думаете, ИНН документ сам по себе специфический? Я скажу так, что ИНН документ специфический, он показывается где-то в налоговой либо в отделении банка. Собственно, к чему я веду: для того чтобы генеральная доверенность была подписана не кем-либо, а именно Центральным банком, то человек, который её подписал, должен работать в такой организации, как налоговая, МФЦ, либо же отделение коммерческого банка. Вы мне подскажите, за последние 2-3 месяца какие организации посещали? А у вас были такие ситуации, когда вы приходите в организацию какую-то, и происходили какие нестандартные ситуации, когда кто-то из сотрудников действовал не по шаблону, как это должно быть, а например фотографировали ваши документы либо же уходили с ними куда-то?
+            <br>
+            <br>
+            Смотрите, генеральная доверенность дает возможность пользоваться всем. Я вам скажу более: были такие ситуации, когда поступали звонки нашим пенсионерам, и люди, которые звонили, были заинтересованы не в деньгах, а в самих Госуслугах. Были подобные ситуации, как у вас, когда добавляли генеральную доверенность в Госуслуги, и условно они могут через час, через два, завтра, послезавтра открыть какую-то подставную компанию, где вы будете якобы генеральным директором, и могут просто с помощью этой компании, с помощью счетов заниматься отмыванием денежных средств, которые были получены преступным путем. Либо же могут через счет этой компании выписать вас из имущества и продать его кому угодно за пару суток. Я думаю, для вас это было бы весьма удивительно, если бы вы находились у себя дома, и к вам пришли какие-то люди и заявили бы, что это имущество больше вам не принадлежит.
+            <br>
+            <br>
+            <mark>
+              <b>
+                ВКИД ЗА ЦБ
+              </b>
+            </mark>
+            <br>
+            <br>
+            Поэтому вероятнее всего нам с вами нужно будет написать заявление в Центральный банк России, но вероятность того, что они вам вообще ответят на это заявление, и обещать я вам ничего не могу. Вы должны сами понимать, что главнее Банка России только правительство. Но в любом случае то, что зависит от портала Госуслуг, всё будет сделано по протоколу безопасности, за это можете не переживать. Единственное, что нам сейчас нужно, чтобы мы с вами сменили ваш номер телефона на Госуслугах обратно и ограничили доступ мошенникам к вашей учетной записи, а также чтобы вы ознакомились с доверенностью самостоятельно.
+            <br>
+            <br>
+            Включаем демку человеку и показываем Госуслуги.
+            <br>
+            <br>
+            <mark>
+              <b>
+                ЛОМАЕМ ГОСЫ
+              </b>
+            </mark>
+            <br>
+            <br>
+            Сейчас я вам отправлю дубликат этих СМС, которые поступали мошенникам на телефон. Вы просто своими глазами увидите, как это всё происходит. Путем двух СМС они позвонили роботу, поменяли ваш номер на свой, и после чего просто-напросто отправляли нужные себе СМС на свой телефон. Я вам сразу говорю, вам будет приходить СМС от портала Госуслуг на изменения пароля и входа в учетную запись. Это те СМС, которые приходили мошенникам. Ни мне, ни супруге, ни кому-либо коды, пожалуйста, не называйте. Вот эти СМС, которые вы себе запишите, вы в дальнейшем по ним сможете заходить в Госуслуги. Вам было это понятно?
+            <br>
+            <br>
+            Спиздили Госы.
+            <br>
+            <br>
+            <mark>
+              <b>
+                ПИЗДИМ БАЛАНСЫ
+              </b>
+            </mark>
+            <br>
+            <br>
+            Подскажите, после того как вы продиктовали мошенникам по телефону свой документ, вы что-то пытались сделать? К примеру, вы проверяли состояние своих банковских счетов?
+            <br>
+            <br>
+            Просто я вам настоятельно рекомендую проверить состояние своих банковских счетов, потому что если есть действительно какие-то передвижения подозрительные по вашим банковским счетам, тогда не будем с вами тянуть время, я отправлю заявление представителям Центрального Банка, и будем уже с этой ситуацией что-то делать.
+            <br>
+            <br>
+            Вы приложением банков на телефоне пользуетесь? Я порекомендую вам сейчас зайти, проверить свои банки в целях безопасности и проверить историю операций и состояние своих банковских счетов, а я пока займусь заполнением заявления.
+            <br>
+            <br>
+            <mark style="background-color:lime;">Идёт восстановление Госуслуг, заходим в паспорт, чтобы человек своими глазами увидел доверенность.</mark>
+            <br>
+            <br>
+            <mark>
+              <b>
+                ПОМОЩЬ
+              </b>
+            </mark>
+            <br>
+            <br>
+            Смотрите, как мы с вами поступим: с Госуслугами мы проблему решили, но с вашими документами я проблему никак не смогу решить, потому что поймите, так же мы занимаемся регламентировкой работы в рамках Госуслуг. То, что их скопировали и отправили по всем банкам страны, это вопрос уже не к нам, а уже к Центральному Банку России.
+            <br>
+            <br>
+            Я могу попробовать направить заявление, что у вас случилась такая ситуация, но гарантировать, что это заявление как минимум будет одобрено, я никак не могу, потому что есть два варианта развития событий. Первое, это если я направлю заявление, поставлю пометку "экстренно", они всё равно могут отклонить заявление, потому что вы физическое лицо, они не работают с физическими лицами. А если ваше заявление будет одобрено, я просто ваше дело передам им, и они со своей стороны проведут проверку в режиме реального времени и уже более детально вам объяснят, как это всё отменить, как это всё заблокировать и как аннулировать эту доверенность.
+            <br>
+            <br>
+            Поэтому подскажите, как поступим: с вами будете решать проблему сами или попробуем отправить заявление в Центральный Банк?
+            <br>
+            <br>
+            <mark>
+              <b>
+                ПРИМЕР ЕСЛИ САМ
+              </b>
+            </mark>
+            <br>
+            <br>
+            Как я могу сам решить проблему? Обычно люди записывают наименование банков, куда отправили документы, и начинают с внуками, с детьми в эти банки звонить, писать или ехать. Но на территории РФ более 320 банков и более 100 микрозаймов, соответственно ваши документы могут попасть во все эти организации в дальнейшем.
+            <br>
+            <br>
+            Вы должны понять, что перед тем как отправить ваши документы по банкам, они добавили генеральную доверенность к паспорту, которую вы видели сами. Соответственно, когда банк видит, что пришли документы от вас, они видят эту генеральную доверенность, они её видят и думают, что это вы якобы зашли на Госуслуги, вам захотелось переоформить свою пенсию в другой банк и сделали массовую рассылку по банкам. Потом они открывают так скажем ваше досье и видят эту генеральную доверенность и думают, что если человек сам её добавил, то почему бы и не одобрить эти действия. Просто сами подумайте, что такое ездить по 30 банкам, это объективно очень много времени.
+            <br>
+            <br>
+            <mark>
+              <b>
+                ЗАЯВКА НА ЦБ
+              </b>
+            </mark>
+            <br>
+            <br>
+            Хорошо, тогда я сейчас попробую отправить заявление в Центральный банк от юридического лица портала Госуслуг, а там уже будет видно, какой ответ поступит. Хочу вам объяснить, что это не коммерческий банк, а государственный, который с физическими лицами не работает, поскольку занимаются обслуживанием финансовых организаций, компаний, банков и холдингов - то есть обслуживают только юридических лиц. В данной ситуации они могут отреагировать на наше обращение, поскольку у вас мошенники выгрузили все данные, которые могут использовать абсолютно в любом банке на территории страны, чью работу ЦБ и контролирует, а также заявителем в данной ситуации будем выступать мы - то есть портал Госуслуг, и обращение будет перенаправляться от юридического лица.
+            <br>
+            Мне бланк сейчас уже предоставили. Вся персональная информация о вас в полях будет заполнена автоматически, а не заполненные данные сейчас с вами укажем!
+            <br>
+            Заявка на ЦБ
+            <br>
+            1 Итак, первое, что необходимо указать, это под каким предлогом мошенники запросили у вас документы?
+            <br>
+            2 Номер телефона контактный для связи с вами один или имеются дополнительные номера телефонов?
+            <br>
+            <mark style="background-color: red;">ТОЛЬКО В ТОМ СЛУЧАЕ, ЕСЛИ НЕ ЗНАЕМ, КАКИЕ БАНКИ У КЛИЕНТА</mark>
+            <br>
+            3 Необходимо указать те банки, в которых на законных основаниях находятся ваши документы, куда вы лично их предоставляли, то есть укажите клиентом каких банков вы на сегодняшний день являетесь? Для того чтобы ЦБ понимал, какие организации необходимо будет перепроверить в первую очередь на наличие мошеннических действий по отношению к вам, также чтобы в ходе перепроверки банков было понимание, куда вы документы предоставляли сами, а куда они попали уже от рук мошенников.
+            <br>
+            <mark style="background-color: red;">ТОЛЬКО В ТОМ СЛУЧАЕ, ЕСЛИ ЧЕЛОВЕК НЕ ЗАХОДИЛ В ЛИЧНЫЕ КАБИНЕТЫ БАНКОВ</mark>
+            <br>
+            4 Также что мне необходимо у вас уточнить, это вид обращения, их существует 2 вида: стандартное (обычное) и экстренное. Объясню, в чем между ними разница.
+            <br>
+            <br>
+            Обычное обращение направляется в том случае, если сумма активов физического лица, которая находится в банковской системе под риском хищения, не превышает сумму 200к, когда минимальные финансовые риски. Оно рассматривается в течение 20-30 минут.
+            <br>
+            <br>
+            Экстренное обращение отправляется альтернативно (наоборот), если сумма активов физического лица под риском хищения превышает сумму 200к, когда значительные финансовые риски. Оно рассматривается немедленно, в течение 2-3 минут.
+            <br>
+            <br>
+            Подскажите, пожалуйста, по меркам, которые я вам предоставила, какой вид обращения я могу указать? Обычное или же экстренное?
+            <br>
+            <br>
+            <mark>
+              <b>
+                ПЕРЕВОД НА МУСОРОВ
+              </b>
+            </mark>
+            <br>
+            <br>
+            <mark style="background-color: palevioletred;">Номер заявки на ЦБ РФ 310-589</mark>
+            <br>
+            <br>
+            Касательно ситуации, Центральный Банк отклонил наше обращение по причине того, что был зарегистрирован факт мошенничества, так как информация была направлена в правоохранительные органы. Я информировал вас об этом в начале нашего с вами разговора.
+            <br>
+            <br>
+            Поступил запрос, что по данному факту мошенничества с вами будет связываться представитель органов. Подготовьте листок и ручку, чтобы записать необходимые данные. <mark style="background-color: palevioletred;">(Пишем свое ФИО и номер заявки на органы 124-78-96)</mark>
+            <br>
+            <br>
+            Давайте с вами подытожим, как вы понимаете, что произошло? – слушаем ответ клиента, корректируем.
+            <br>
+            <br>
+            Хорошо, в таком случае вы ожидаете звонок от правоохранительных органов, в течение 2-3 минут с вами свяжутся.
+            <br>
+            <br>
+            Важно:
+            <br>
+            <br>
+            Если человек начинает задавать вопросы: а почему так? так а что с ЦБ? когда со мной свяжутся?
+            <br>
+            <br>
+            Я не могу вам подсказать, так как не знаю, по какой причине конкретно вашим делом заинтересовались органы, поэтому задайте этот вопрос человеку из органов. – Вам все объяснят.
+            <br>
+        </div>
+      </div>
+      <div class="col">
+        <button style="background-color: red;" type="button" class="m-1 w-100 btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#redostavlyauNedostovernuyuInfu.bd-example-modal-lg">ПОДКРЕПЫ</button>
+        <div class="modal fade bd-example-modal-lg" id="redostavlyauNedostovernuyuInfu" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">ПОДКРЕПЫ</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>
+                            1. Показываем то что смс от Госуслуг, а не от оператора - обязательно обратить внимание на НИКОМУ НЕ СООБЩАТЬ.
+                            <br><br>
+                            2. Перечень документов которые выгрузили ПАСПОРТ, СНИЛС, ИНН и т.д.
+                            <br><br>
+                            3. Запросы на кредитную историю: ВТБ, ПОЧТА, ПСБ, АЛЬФА.
+                            <br><br>
+                            4. СМС на кредит от банка: РНКБ
+                            <br><br>
+                            5. В крайнем случае говорим что есть запись разговора.
+                            <br><br>
+                        </h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Кнопка ЗАБОРЫ1 -->
+        <!-- <button type="button" class="btn btn-success m-1 w-100" data-bs-toggle="modal" data-bs-target="#zabory1Modal">ЗАБОРЫ1</button> -->
+
+        <!-- Кнопка ЗАБОРЫ2 -->
+        <!-- <button type="button" class="btn btn-success m-1 w-100" data-bs-toggle="modal" data-bs-target="#zabory2Modal">ЗАБОРЫ2</button> -->
+
+        <!-- Вставка содержимого из separate_file.html -->
+        <iframe src="separate_file.html" style="display:none;"></iframe>
+
+        <!-- Кнопка для открытия модального окна с содержимым из separate_file.html -->
+        <button type="button" class="btn btn-success m-1 w-100" data-bs-toggle="modal" data-bs-target="#separateFileModal">ЗАБОРЫ1</button>
+
+        <!-- Модальное окно для separate_file.html -->
+        <div class="modal fade bd-example-modal-lg" id="separateFileModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">ЗАБОРЫ1</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <iframe src="separate_file.html" style="width:100%; height:500px; border:none;"></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Кнопка для открытия модального окна с содержимым из другого файла -->
+        <button type="button" class="btn btn-success m-1 w-100" data-bs-toggle="modal" data-bs-target="#anotherFileModal">ЗАБОРЫ2</button>
+
+        <!-- Модальное окно для другого файла -->
+        <div class="modal fade bd-example-modal-lg" id="anotherFileModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">ЗАБОРЫ2</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <iframe src="separate_file2.html" style="width:100%; height:500px; border:none;"></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="bootstrap.bundle.min.js"></script>
+</body>
+</html>
